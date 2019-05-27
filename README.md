@@ -55,13 +55,13 @@ vector.EqualFunc(vector.New(1, 2, 3, 4, 5), v, func(a, b interface{}) bool {
 
 For more info, check out [the package documentation](https://godoc.org/github.com/erizocosmico/go-vector).
 
+## Thread safety
+
+This implementation is not intended to be thread safe.
+
 ## Type safety
 
 Due to Go's lack of generic types, this data structure uses `interface{}`, that means you can store any kind of element and not just a fixed type. Also, you will need to convert the results obtained from the vector from `interface{}` to the actual type.
-
-## Thread-safety
-
-This implementation is not intended to be thread safe.
 
 ## Benchmarks
 
