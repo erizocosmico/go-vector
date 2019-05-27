@@ -44,16 +44,24 @@ even := v.Filter(func(x interface{}) bool {
 firstThree := v.Take(3)
 allButFirst := v.Drop(1)
 
-vector.Equal(New(-1, 2, 3, 4, 5), v) // will output true
+vector.Equal(vector.New(-1, 2, 3, 4, 5), v) // will output true
 
 // Check if they're equal using a custom function. This will return false
 // because the vectors are not equal.
-vector.EqualFunc(New(1, 2, 3, 4, 5), v, func(a, b interface{}) bool {
+vector.EqualFunc(vector.New(1, 2, 3, 4, 5), v, func(a, b interface{}) bool {
     return a.(int) == b.(int)
 })
 ```
 
 For more info, check out [the package documentation](https://godoc.org/github.com/erizocosmico/go-vector).
+
+## Type safety
+
+Due to Go's lack of generic types, this data structure uses `interface{}`, that means you can store any kind of element and not just a fixed type. Also, you will need to convert the results obtained from the vector from `interface{}` to the actual type.
+
+## Thread-safety
+
+This implementation is not intended to be thread safe.
 
 ## Benchmarks
 
