@@ -176,8 +176,9 @@ func (v *Vector) tailOffset() uint64 {
 
 // Slice returns the elements of the vector in a slice.
 func (v *Vector) Slice() []interface{} {
-	var result = make([]interface{}, int(v.count))
-	for i := 0; i < int(v.count); i++ {
+	size := int(v.count) - v.start
+	var result = make([]interface{}, size)
+	for i := 0; i < size; i++ {
 		result[i] = v.Get(i)
 	}
 	return result
@@ -222,6 +223,10 @@ func (v *Vector) Take(n int) *Vector {
 // Drop returns a new vector with all the elements in this vector dropping the
 // first n elements.
 func (v *Vector) Drop(n int) *Vector {
+	if n < 0 {
+		panic("cannot drop less than 0 items")
+	}
+
 	if uint64(v.start+n) >= v.count {
 		return New()
 	}

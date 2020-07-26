@@ -35,6 +35,7 @@ func TestTake(t *testing.T) {
 
 func TestDrop(t *testing.T) {
 	require.True(t, Equal(New(1, 2, 3, 4).Drop(2), New(3, 4)))
+	require.Equal(t, 2, len(New(1, 2, 3, 4).Drop(2).Slice()))
 }
 
 func TestSlice(t *testing.T) {
